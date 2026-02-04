@@ -5,7 +5,7 @@ import random
 # --- 1. OPSÆTNING ---
 st.set_page_config(page_title="Love & Travel", page_icon="❤️", layout="centered")
 
-# --- 2. CSS STYLING (GLASSMORPHISM & UI) ---
+# --- 2. CSS STYLING (FINAL POLISH) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
@@ -15,7 +15,13 @@ st.markdown("""
         font-family: 'Poppins', sans-serif;
     }
 
-    #MainMenu, footer, header {visibility: hidden;}
+    /* SKJUL STREAMLIT UI (Hamburgermenu, Footer, Header, Toolbar) */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .stAppToolbar {display: none !important;} 
+    div[data-testid="stToolbar"] {display: none !important;}
+    div[data-testid="stDecoration"] {display: none !important;}
 
     h1, h2, h3 {
         font-family: 'Playfair Display', serif;
@@ -179,12 +185,11 @@ def create_travel_link(origin, destination_code, date_out, date_home):
 
 # --- 4. DATA ---
 
-# REJSER (Med nyt Malaga billede)
 DESTINATIONS = [
     {"name": "Sverige (Stockholm)", "country": "Sverige 🇸🇪", "code": "ARN", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Skærgård, natur og spa-hoteller.", "img": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=800&q=80"},
     {"name": "Norge (Oslo)", "country": "Norge 🇳🇴", "code": "OSL", "price": "600 kr.", "tags": ["Wellness", "Storby"], "desc": "Fjelde, fjorde og frisk luft.", "img": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?w=800&q=80"},
     {"name": "Budapest", "country": "Ungarn 🇭🇺", "code": "BUD", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Termiske bade og spa-luksus.", "img": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?w=800&q=80"},
-    {"name": "Malaga", "country": "Spanien 🇪🇸", "code": "AGP", "price": "950 kr.", "tags": ["Sol & Strand", "Storby"], "desc": "Solkysten og lækker tapas.", "img": "https://images.pexels.com/photos/33422911/pexels-photo-33422911.jpeg"}, # NYT BILLEDE
+    {"name": "Malaga", "country": "Spanien 🇪🇸", "code": "AGP", "price": "950 kr.", "tags": ["Sol & Strand", "Storby"], "desc": "Solkysten og lækker tapas.", "img": "https://images.unsplash.com/photo-1628527264627-88f573c09194?w=800&q=80"},
     {"name": "Paris", "country": "Frankrig 🇫🇷", "code": "CDG", "price": "750 kr.", "tags": ["Romantik", "Storby"], "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
     {"name": "Gdansk", "country": "Polen 🇵🇱", "code": "GDN", "price": "350 kr.", "tags": ["Wellness", "Storby"], "desc": "Billig spa og smuk havn.", "img": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80"},
     {"name": "Venedig", "country": "Italien 🇮🇹", "code": "VCE", "price": "950 kr.", "tags": ["Romantik"], "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
@@ -193,17 +198,16 @@ DESTINATIONS = [
     {"name": "Santorini", "country": "Grækenland 🇬🇷", "code": "JTR", "price": "1.800 kr.", "tags": ["Luksus", "Sol & Strand", "Romantik"], "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
 ]
 
-# GAVER
 GIFTS = {
     "Til Hende": [
         {"name": "Luksus Gavekurve", "brand": "Gaestus", "price": "Forkælelse", "img": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=93733"},
         {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"},
-        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.pexels.com/photos/7563561/pexels-photo-7563561.jpeg", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
+        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1617038220319-88af1505d7b1?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
         {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"},
     ],
     "Til Ham": [
         {"name": "Alt til Fodboldfans", "brand": "Fodboldgaver.dk", "price": "Merchandise", "img": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=115924"},
-        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.pexels.com/photos/14962486/pexels-photo-14962486.jpeg", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
+        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.unsplash.com/photo-1595167332289-54b6d4826848?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
         {"name": "Elektronik & Gadgets", "brand": "Proshop", "price": "Kæmpe udvalg", "img": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=67785"},
         {"name": "Outdoor Udstyr", "brand": "Pro Outdoor", "price": "Til Eventyret", "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=42820"},
         {"name": "Barbering & Pleje", "brand": "Shavesafe", "price": "Fra 149,-", "img": "https://images.unsplash.com/photo-1621607512214-68297480165e?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=75729"},
