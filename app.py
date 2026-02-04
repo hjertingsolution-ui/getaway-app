@@ -118,19 +118,21 @@ st.markdown("""
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     
-    /* GAVE KATEGORI KNAPPER (Radio) */
+    /* KATEGORI KNAPPER (Radio - Pills Style) */
     div[role="radiogroup"] {
         display: flex;
+        flex-wrap: wrap; /* Tillad ombrydning på små skærme */
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
     }
     div[role="radiogroup"] label {
         background-color: white !important;
         border: 1px solid #eee;
-        padding: 10px 20px;
+        padding: 8px 16px;
         border-radius: 25px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         flex: 1;
+        min-width: fit-content; /* Sikrer at teksten kan være der */
         justify-content: center;
         text-align: center;
     }
@@ -141,7 +143,8 @@ st.markdown("""
     }
     div[role="radiogroup"] label p {
         font-weight: 600;
-        font-size: 14px;
+        font-size: 13px;
+        margin: 0px;
     }
     div[role="radiogroup"] label[data-checked="true"] p {
         color: white !important;
@@ -176,26 +179,30 @@ def create_travel_link(origin, destination_code, date_out, date_home):
 
 # --- 4. DATA ---
 
+# REJSER MED TAGS
+# Tags: Romantik, Wellness, Storby, Sol & Strand
 DESTINATIONS = [
-    {"name": "Paris", "country": "Frankrig", "code": "CDG", "price": "750 kr.", "tag": "Romantik", "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
-    {"name": "Venedig", "country": "Italien", "code": "VCE", "price": "950 kr.", "tag": "Romantik", "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
-    {"name": "Rom", "country": "Italien", "code": "FCO", "price": "600 kr.", "tag": "Kultur", "desc": "Evig kærlighed i den evige stad.", "img": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80"},
-    {"name": "Budapest", "country": "Ungarn", "code": "BUD", "price": "450 kr.", "tag": "Spa", "desc": "Luksus spa-ophold til lavpris.", "img": "https://images.unsplash.com/photo-1565426873118-a1dfa58f877d?w=800&q=80"},
-    {"name": "Prag", "country": "Tjekkiet", "code": "PRG", "price": "400 kr.", "tag": "Budget", "desc": "Brostensgader og hygge.", "img": "https://images.unsplash.com/photo-1541849546-2165492d06b1?w=800&q=80"},
-    {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tag": "Luksus", "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
+    {"name": "Paris", "country": "Frankrig", "code": "CDG", "price": "750 kr.", "tags": ["Romantik", "Storby"], "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
+    {"name": "Budapest", "country": "Ungarn", "code": "BUD", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Termiske bade og spa-luksus.", "img": "https://images.unsplash.com/photo-1599587401777-669d71c482c2?w=800&q=80"}, # NYT BILLEDE
+    {"name": "Gdansk", "country": "Polen", "code": "GDN", "price": "350 kr.", "tags": ["Wellness", "Storby"], "desc": "Billig spa og smuk havn.", "img": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80"},
+    {"name": "Venedig", "country": "Italien", "code": "VCE", "price": "950 kr.", "tags": ["Romantik"], "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
+    {"name": "Rom", "country": "Italien", "code": "FCO", "price": "600 kr.", "tags": ["Kultur", "Storby", "Romantik"], "desc": "Evig kærlighed i den evige stad.", "img": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80"},
+    {"name": "Prag", "country": "Tjekkiet", "code": "PRG", "price": "400 kr.", "tags": ["Storby", "Budget"], "desc": "Brostensgader og hygge.", "img": "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800&q=80"}, # NYT BILLEDE
+    {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tags": ["Luksus", "Sol & Strand", "Romantik"], "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
+    {"name": "Malaga", "country": "Spanien", "code": "AGP", "price": "950 kr.", "tags": ["Sol & Strand", "Storby"], "desc": "Solkysten og lækker tapas.", "img": "https://images.unsplash.com/photo-1565259972852-6b95c029676e?w=800&q=80"},
 ]
 
-# OPDATERET GAVE LISTE MED NYE LINKS
+# GAVER MED NYE BILLEDER
 GIFTS = {
     "Til Hende": [
         {"name": "Luksus Gavekurve", "brand": "Gaestus", "price": "Forkælelse", "img": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=93733"},
-        {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1556228720-1987eb83bb5d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"},
-        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1629196914168-3a9644336cf3?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
-        {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"},
+        {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"}, # NYT BILLEDE
+        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1617038220319-88af1505d7b1?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"}, # NYT BILLEDE
+        {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"}, # NYT BILLEDE
     ],
     "Til Ham": [
-        {"name": "Alt til Fodboldfans", "brand": "Fodboldgaver.dk", "price": "Merchandise", "img": "https://images.unsplash.com/photo-1522778119026-d647f0565c6a?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=115924"},
-        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.unsplash.com/photo-1512117518974-95499291f09c?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
+        {"name": "Alt til Fodboldfans", "brand": "Fodboldgaver.dk", "price": "Merchandise", "img": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=115924"}, # NYT BILLEDE
+        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.unsplash.com/photo-1595167332289-54b6d4826848?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"}, # NYT BILLEDE
         {"name": "Elektronik & Gadgets", "brand": "Proshop", "price": "Kæmpe udvalg", "img": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=67785"},
         {"name": "Outdoor Udstyr", "brand": "Pro Outdoor", "price": "Til Eventyret", "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=42820"},
         {"name": "Barbering & Pleje", "brand": "Shavesafe", "price": "Fra 149,-", "img": "https://images.unsplash.com/photo-1621607512214-68297480165e?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=75729"},
@@ -234,6 +241,15 @@ with tab_rejser:
     
     st.divider()
 
+    # --- FILTER KNAPPER (NEW) ---
+    travel_category = st.radio(
+        "Filtrer efter type:", 
+        ["Alle", "Romantik", "Wellness", "Storby", "Sol & Strand"], 
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+    st.write("") 
+
     # --- PRØV LYKKEN SEKTION ---
     if st.button("🎲 Prøv lykken - Vælg for os"):
         st.session_state['surprise_city'] = random.choice(DESTINATIONS)
@@ -263,8 +279,20 @@ with tab_rejser:
         st.divider()
         st.caption("Eller vælg selv fra listen:")
 
-    # 2. Vis Rejser (Normal liste)
-    for dest in DESTINATIONS:
+    # 2. Vis Rejser (Filtreret)
+    
+    # Filter logik
+    filtered_destinations = []
+    for d in DESTINATIONS:
+        if travel_category == "Alle":
+            filtered_destinations.append(d)
+        elif travel_category in d["tags"]:
+            filtered_destinations.append(d)
+    
+    if not filtered_destinations:
+        st.info("Ingen rejser fundet i denne kategori.")
+    
+    for dest in filtered_destinations:
         with st.container():
             st.image(dest["img"], use_container_width=True)
             
