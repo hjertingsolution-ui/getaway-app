@@ -5,7 +5,7 @@ import random
 # --- 1. OPSÆTNING ---
 st.set_page_config(page_title="Love & Travel", page_icon="❤️", layout="centered")
 
-# --- 2. CSS STYLING (GLASSMORPHISM & ROMANCE) ---
+# --- 2. CSS STYLING (GLASSMORPHISM & BREDE KNAPPER) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
@@ -21,7 +21,7 @@ st.markdown("""
 
     /* --- TYPOGRAFI --- */
     h1, h2, h3 {
-        font-family: 'Playfair Display', serif; /* Elegant font til overskrifter */
+        font-family: 'Playfair Display', serif;
         color: #2c3e50;
     }
     
@@ -40,10 +40,10 @@ st.markdown("""
         font-style: italic;
     }
 
-    /* --- GLASSMORPHISM KORT (Rejser & Gaver) --- */
+    /* --- GLASSMORPHISM KORT --- */
     div[data-testid="stVerticalBlock"] > div > div[data-testid="stVerticalBlock"] {
-        background: rgba(255, 255, 255, 0.85); /* Halvgennemsigtig hvid */
-        backdrop-filter: blur(10px); /* Sløret baggrund */
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
         padding: 20px;
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
@@ -60,14 +60,13 @@ st.markdown("""
     }
 
     /* --- KNAPPER --- */
-    /* Primær knap (Sort/Mørk) */
     div.stButton > button:first-child {
         width: 100%;
         background: linear-gradient(45deg, #1A1A1A, #4a4a4a);
         color: white;
         font-size: 15px;
         font-weight: 600;
-        border-radius: 50px; /* Pilleform */
+        border-radius: 50px;
         padding: 12px 24px;
         border: none;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -89,25 +88,31 @@ st.markdown("""
         border: 1px solid #eee;
     }
 
-    /* --- TABS STYLING --- */
+    /* --- TABS STYLING (OPDATERET: BREDE KNAPPER) --- */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
+        gap: 8px;
         background-color: transparent;
+        width: 100%; /* Sikrer containeren fylder ud */
     }
     .stTabs [data-baseweb="tab"] {
-        height: 50px;
+        height: 55px;
         white-space: pre-wrap;
-        background-color: white;
-        border-radius: 20px;
-        gap: 1px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        border: 1px solid #eee;
+        background-color: rgba(255, 255, 255, 0.6); /* Lidt gennemsigtig */
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
         color: #555;
+        font-weight: 600;
+        font-size: 16px;
+        flex: 1; /* MAGIEN: Dette tvinger knapperne til at dele pladsen ligeligt (50/50) */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
+    
+    /* Den aktive fane */
     .stTabs [aria-selected="true"] {
         background-color: #1A1A1A !important;
         color: white !important;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -115,9 +120,7 @@ st.markdown("""
 # --- 3. FUNKTIONER ---
 
 def calculate_dates(duration_type):
-    """Beregner datoer baseret på om det er weekend eller miniferie"""
     today = date.today()
-    # Find næste fredag (4)
     days_until_friday = 4 - today.weekday()
     if days_until_friday <= 0: days_until_friday += 7
     friday = today + timedelta(days=days_until_friday)
@@ -137,12 +140,10 @@ def calculate_dates(duration_type):
 def create_travel_link(origin, destination_code, date_out, date_home):
     d_out = date_out.strftime("%d%m")
     d_home = date_home.strftime("%d%m")
-    # Linker til din White Label
     return f"https://rejser.dreamtravel.dk/flights/{origin}{d_out}{destination_code}{d_home}1"
 
 # --- 4. DATA ---
 
-# REJSER (Romantisk Fokus)
 DESTINATIONS = [
     {"name": "Paris", "country": "Frankrig", "code": "CDG", "price": "750 kr.", "tag": "Romantik", "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
     {"name": "Venedig", "country": "Italien", "code": "VCE", "price": "950 kr.", "tag": "Romantik", "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
@@ -152,17 +153,16 @@ DESTINATIONS = [
     {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tag": "Luksus", "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
 ]
 
-# GAVER (Affiliate Placeholder Data)
 GIFTS = {
     "Hende": [
-        {"name": "Luksus Spa Dag", "brand": "DuGlemmerDetAldrig", "price": "899,-", "img": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
-        {"name": "Parfume Abonnement", "brand": "Goodiebox", "price": "199,-", "img": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
-        {"name": "Weekendtaske Læder", "brand": "CarrieAlong", "price": "1.200,-", "img": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Luksus Spa Dag", "brand": "DuGlemmerDetAldrig", "price": "899,-", "img": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600", "link": "LINK_HER"},
+        {"name": "Parfume Abonnement", "brand": "Goodiebox", "price": "199,-", "img": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600", "link": "LINK_HER"},
+        {"name": "Weekendtaske Læder", "brand": "CarrieAlong", "price": "1.200,-", "img": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600", "link": "LINK_HER"},
     ],
     "Ham": [
-        {"name": "Kør Lamborghini", "brand": "DuGlemmerDetAldrig", "price": "1.495,-", "img": "https://images.unsplash.com/photo-1544614471-ebc48f6d1311?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
-        {"name": "Gin Smagning", "brand": "Smagning.dk", "price": "399,-", "img": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
-        {"name": "Støjdæmpende høretelefoner", "brand": "Proshop", "price": "1.800,-", "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Kør Lamborghini", "brand": "DuGlemmerDetAldrig", "price": "1.495,-", "img": "https://images.unsplash.com/photo-1544614471-ebc48f6d1311?w=600", "link": "LINK_HER"},
+        {"name": "Gin Smagning", "brand": "Smagning.dk", "price": "399,-", "img": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600", "link": "LINK_HER"},
+        {"name": "Støjdæmpende høretelefoner", "brand": "Proshop", "price": "1.800,-", "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600", "link": "LINK_HER"},
     ]
 }
 
@@ -179,7 +179,7 @@ tab_rejser, tab_gaver = st.tabs(["✈️ Rejser", "🎁 Gaveidéer"])
 
 # --- FANE 1: REJSER ---
 with tab_rejser:
-    st.write("") # Spacer
+    st.write("") 
     
     # 1. Konfiguration
     c1, c2 = st.columns([1, 1])
@@ -192,14 +192,13 @@ with tab_rejser:
     date_out, date_home = calculate_dates(duration)
     st.caption(f"📅 Næste tur: {date_out.day}/{date_out.month} - {date_home.day}/{date_home.month}")
     
-    st.divider()
+    st.write("") # Lidt luft
 
     # 2. Vis Rejser
     for dest in DESTINATIONS:
         with st.container():
             st.image(dest["img"], use_container_width=True)
             
-            # Tekst og pris i to kolonner
             t1, t2 = st.columns([2, 1])
             with t1:
                 st.subheader(dest["name"])
@@ -207,7 +206,6 @@ with tab_rejser:
             with t2:
                 st.markdown(f"<div style='text-align:right;'><span class='price-tag'>{dest['price']}</span></div>", unsafe_allow_html=True)
             
-            # Generer link
             link = create_travel_link(origin, dest["code"], date_out, date_home)
             st.link_button(f"Book {duration.split(' ')[0]} i {dest['name']} ➝", link)
 
@@ -220,7 +218,6 @@ with tab_gaver:
     
     st.write("")
     
-    # Grid layout til gaver
     selected_gifts = GIFTS[gift_gender]
     
     for gift in selected_gifts:
