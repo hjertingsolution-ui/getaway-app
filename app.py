@@ -179,12 +179,12 @@ def create_travel_link(origin, destination_code, date_out, date_home):
 
 # --- 4. DATA ---
 
-# REJSER (Nu med Sverige, Norge og rettede billeder)
+# REJSER (Med nyt Malaga billede)
 DESTINATIONS = [
     {"name": "Sverige (Stockholm)", "country": "Sverige 🇸🇪", "code": "ARN", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Skærgård, natur og spa-hoteller.", "img": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=800&q=80"},
     {"name": "Norge (Oslo)", "country": "Norge 🇳🇴", "code": "OSL", "price": "600 kr.", "tags": ["Wellness", "Storby"], "desc": "Fjelde, fjorde og frisk luft.", "img": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?w=800&q=80"},
-    {"name": "Budapest", "country": "Ungarn 🇭🇺", "code": "BUD", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Termiske bade og spa-luksus.", "img": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?w=800&q=80"}, # NYT BILLEDE
-    {"name": "Malaga", "country": "Spanien 🇪🇸", "code": "AGP", "price": "950 kr.", "tags": ["Sol & Strand", "Storby"], "desc": "Solkysten og lækker tapas.", "img": "https://images.unsplash.com/photo-1582234032585-86d389a4242e?w=800&q=80"}, # NYT BILLEDE
+    {"name": "Budapest", "country": "Ungarn 🇭🇺", "code": "BUD", "price": "450 kr.", "tags": ["Wellness", "Storby"], "desc": "Termiske bade og spa-luksus.", "img": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?w=800&q=80"},
+    {"name": "Malaga", "country": "Spanien 🇪🇸", "code": "AGP", "price": "950 kr.", "tags": ["Sol & Strand", "Storby"], "desc": "Solkysten og lækker tapas.", "img": "https://images.unsplash.com/photo-1628527264627-88f573c09194?w=800&q=80"}, # NYT BILLEDE
     {"name": "Paris", "country": "Frankrig 🇫🇷", "code": "CDG", "price": "750 kr.", "tags": ["Romantik", "Storby"], "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
     {"name": "Gdansk", "country": "Polen 🇵🇱", "code": "GDN", "price": "350 kr.", "tags": ["Wellness", "Storby"], "desc": "Billig spa og smuk havn.", "img": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80"},
     {"name": "Venedig", "country": "Italien 🇮🇹", "code": "VCE", "price": "950 kr.", "tags": ["Romantik"], "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
