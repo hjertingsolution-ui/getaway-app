@@ -198,12 +198,12 @@ GIFTS = {
     "Til Hende": [
         {"name": "Luksus Gavekurve", "brand": "Gaestus", "price": "Forkælelse", "img": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=93733"},
         {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"},
-        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1617038220319-88af1505d7b1?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
+        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.pexels.com/photos/7563561/pexels-photo-7563561.jpeg", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
         {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"},
     ],
     "Til Ham": [
         {"name": "Alt til Fodboldfans", "brand": "Fodboldgaver.dk", "price": "Merchandise", "img": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=115924"},
-        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.unsplash.com/photo-1595167332289-54b6d4826848?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
+        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.pexels.com/photos/14962486/pexels-photo-14962486.jpeg", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
         {"name": "Elektronik & Gadgets", "brand": "Proshop", "price": "Kæmpe udvalg", "img": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=67785"},
         {"name": "Outdoor Udstyr", "brand": "Pro Outdoor", "price": "Til Eventyret", "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=42820"},
         {"name": "Barbering & Pleje", "brand": "Shavesafe", "price": "Fra 149,-", "img": "https://images.unsplash.com/photo-1621607512214-68297480165e?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=75729"},
