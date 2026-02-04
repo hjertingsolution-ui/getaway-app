@@ -15,7 +15,7 @@ st.markdown("""
     }
 
     .stApp {
-        background-color: #F2F5F8; /* Travy baggrundsfarve */
+        background-color: #F2F5F8;
     }
 
     /* Skjul standard ting */
@@ -34,7 +34,9 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* --- PILLS DESIGN (Hacker st.radio til at ligne knapper) --- */
+    /* --- RETTELSE AF KNAPPER (PILLS) --- */
+    
+    /* Selve knap-containeren */
     div[role="radiogroup"] {
         display: flex;
         flex-direction: row;
@@ -42,33 +44,42 @@ st.markdown("""
         overflow-x: auto;
     }
     
+    /* Selve knappen (label) */
     div[role="radiogroup"] label {
-        background-color: white;
-        padding: 8px 20px;
-        border-radius: 25px;
-        border: 1px solid #eee;
-        color: #888;
-        font-weight: 600;
-        font-size: 14px;
+        background-color: white !important;
+        padding: 8px 20px !important;
+        border-radius: 25px !important;
+        border: 1px solid #eee !important;
+        cursor: pointer;
         transition: all 0.2s;
         box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        cursor: pointer;
     }
 
-    /* Når en knap er valgt (Aktiv) */
+    /* TVING TEKSTEN TIL AT VÆRE SYNLIG (SORT) */
+    div[role="radiogroup"] label p {
+        color: #555 !important; /* Mørkegrå tekst */
+        font-weight: 600 !important;
+        font-size: 14px !important;
+    }
+
+    /* NÅR KNAPPEN ER VALGT (AKTIV) */
     div[role="radiogroup"] label[data-checked="true"] {
-        background-color: #1A1A1A !important;
+        background-color: #1A1A1A !important; /* Sort baggrund */
+        border-color: #1A1A1A !important;
+    }
+    
+    /* TVING TEKSTEN TIL AT VÆRE HVID VED VALG */
+    div[role="radiogroup"] label[data-checked="true"] p {
         color: white !important;
-        border: 1px solid #1A1A1A !important;
     }
 
     div[role="radiogroup"] label:hover {
-        border-color: #ccc;
+        border-color: #aaa !important;
     }
 
-    /* Skjul den lille cirkel i radio-knappen */
-    div[role="radiogroup"] label div:first-child {
-        display: none;
+    /* SKJUL DEN LILLE "RADIO-CIRKEL" */
+    div[role="radiogroup"] label > div:first-child {
+        display: none !important;
     }
 
     /* --- KORT DESIGN --- */
@@ -86,7 +97,7 @@ st.markdown("""
         object-fit: cover;
     }
 
-    /* --- KNAPPER (Sort Travy stil) --- */
+    /* --- SORT KNAP (LINK) --- */
     div.stButton > button:first-child {
         width: 100%;
         background-color: #1A1A1A;
