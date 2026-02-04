@@ -200,7 +200,7 @@ GIFTS = {
     ],
     "For Begge": [
         {"name": "Spa & Wellness Ophold", "brand": "Hotel Viking", "price": "Luksus", "img": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=77692"},
-        {"name": "Kærlighed & Leg", "brand": "Sinful", "price": "Frække gaver", "img": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=84227"},
+        {"name": "Kærlighed & Leg", "brand": "Private Play", "price": "Frække gaver", "img": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=84227"},
         {"name": "Sjov 'Depresso' Kaffe", "brand": "Depresso Coffee", "price": "Fra 129,-", "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=79802"},
     ]
 }
