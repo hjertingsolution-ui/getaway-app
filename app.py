@@ -185,20 +185,24 @@ DESTINATIONS = [
     {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tag": "Luksus", "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
 ]
 
-# DINE AFFILIATE LINKS ER NU HERINDE:
+# OPDATERET GAVE LISTE MED NYE LINKS
 GIFTS = {
     "Til Hende": [
+        {"name": "Luksus Gavekurve", "brand": "Gaestus", "price": "Forkælelse", "img": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=93733"},
         {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1556228720-1987eb83bb5d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"},
         {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1629196914168-3a9644336cf3?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
         {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"},
     ],
     "Til Ham": [
+        {"name": "Alt til Fodboldfans", "brand": "Fodboldgaver.dk", "price": "Merchandise", "img": "https://images.unsplash.com/photo-1522778119026-d647f0565c6a?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=115924"},
+        {"name": "Zippo & Lightere", "brand": "LighterLand", "price": "Cool Gadgets", "img": "https://images.unsplash.com/photo-1512117518974-95499291f09c?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=90007"},
         {"name": "Elektronik & Gadgets", "brand": "Proshop", "price": "Kæmpe udvalg", "img": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=67785"},
         {"name": "Outdoor Udstyr", "brand": "Pro Outdoor", "price": "Til Eventyret", "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=42820"},
         {"name": "Barbering & Pleje", "brand": "Shavesafe", "price": "Fra 149,-", "img": "https://images.unsplash.com/photo-1621607512214-68297480165e?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=75729"},
         {"name": "Gourmet Kaffe", "brand": "KaffeImperiet", "price": "Luksus bønner", "img": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=114886"},
     ],
     "For Begge": [
+        {"name": "Eksklusiv Vinklub", "brand": "RareWine Trading", "price": "Investér i vin", "img": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=114954"},
         {"name": "Spa & Wellness Ophold", "brand": "Hotel Viking", "price": "Luksus", "img": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=77692"},
         {"name": "Kærlighed & Leg", "brand": "Private Play", "price": "Frække gaver", "img": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=84227"},
         {"name": "Sjov 'Depresso' Kaffe", "brand": "Depresso Coffee", "price": "Fra 129,-", "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=79802"},
