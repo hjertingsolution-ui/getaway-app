@@ -3,271 +3,235 @@ from datetime import date, timedelta
 import random
 
 # --- 1. OPSÆTNING ---
-st.set_page_config(page_title="DreamTravel", page_icon="✈️", layout="centered")
+st.set_page_config(page_title="Love & Travel", page_icon="❤️", layout="centered")
 
-# --- 2. CSS STYLING ---
+# --- 2. CSS STYLING (GLASSMORPHISM & ROMANCE) ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
 
-    html, body, [class*="css"] {
+    /* Baggrund: En lækker varm gradient */
+    .stApp {
+        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
         font-family: 'Poppins', sans-serif;
     }
 
-    .stApp {
-        background-color: #F2F5F8;
-    }
-
+    /* Skjul standard ting */
     #MainMenu, footer, header {visibility: hidden;}
+
+    /* --- TYPOGRAFI --- */
+    h1, h2, h3 {
+        font-family: 'Playfair Display', serif; /* Elegant font til overskrifter */
+        color: #2c3e50;
+    }
     
-    .header-text {
-        font-size: 28px;
+    .hero-title {
+        font-size: 36px;
         font-weight: 700;
+        text-align: center;
         color: #1A1A1A;
-        margin-bottom: 0px;
+        margin-bottom: 5px;
     }
-    .sub-header-text {
+    .hero-subtitle {
         font-size: 16px;
-        color: #888;
-        margin-bottom: 20px;
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-style: italic;
     }
 
-    /* --- PILLS DESIGN (Kategorier) --- */
-    div[role="radiogroup"] {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-    }
-    
-    div[role="radiogroup"] label {
-        background-color: white !important;
-        padding: 8px 20px !important;
-        border-radius: 25px !important;
-        border: 1px solid #eee !important;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        min-width: fit-content;
-    }
-
-    div[role="radiogroup"] label p {
-        color: #555 !important;
-        font-weight: 600 !important;
-        font-size: 14px !important;
-    }
-
-    div[role="radiogroup"] label[data-checked="true"] {
-        background-color: #1A1A1A !important;
-        border-color: #1A1A1A !important;
-    }
-    div[role="radiogroup"] label[data-checked="true"] p {
-        color: white !important;
-    }
-
-    div[role="radiogroup"] label > div:first-child {
-        display: none !important;
-    }
-
-    /* --- KORT DESIGN --- */
+    /* --- GLASSMORPHISM KORT (Rejser & Gaver) --- */
     div[data-testid="stVerticalBlock"] > div > div[data-testid="stVerticalBlock"] {
-        background-color: white;
-        border-radius: 24px;
-        padding: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        background: rgba(255, 255, 255, 0.85); /* Halvgennemsigtig hvid */
+        backdrop-filter: blur(10px); /* Sløret baggrund */
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.18);
         margin-bottom: 25px;
-        border: 1px solid #fff;
+        transition: transform 0.3s ease;
     }
 
     div[data-testid="stImage"] img {
-        border-radius: 20px;
+        border-radius: 15px;
         object-fit: cover;
-        height: 200px !important;
+        height: 220px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     /* --- KNAPPER --- */
+    /* Primær knap (Sort/Mørk) */
     div.stButton > button:first-child {
         width: 100%;
-        background-color: #1A1A1A;
+        background: linear-gradient(45deg, #1A1A1A, #4a4a4a);
         color: white;
         font-size: 15px;
         font-weight: 600;
-        border-radius: 20px;
-        padding: 12px 20px;
+        border-radius: 50px; /* Pilleform */
+        padding: 12px 24px;
         border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
     div.stButton > button:hover {
-        background-color: #333;
-        transform: translateY(-2px);
+        transform: scale(1.02);
+        background: linear-gradient(45deg, #000, #333);
     }
-    
+
+    /* --- PRIS TAG --- */
     .price-tag {
-        text-align: right; 
-        font-weight: 700; 
-        font-size: 18px; 
-        color: #1A1A1A; 
-        margin-top: 5px;
+        background-color: #f8f9fa;
+        padding: 5px 12px;
+        border-radius: 10px;
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 16px;
+        display: inline-block;
+        border: 1px solid #eee;
     }
-    
-    div[data-baseweb="select"] > div {
-        background-color: #fff;
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+
+    /* --- TABS STYLING --- */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        background-color: transparent;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        background-color: white;
+        border-radius: 20px;
+        gap: 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: 1px solid #eee;
+        color: #555;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #1A1A1A !important;
+        color: white !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
 # --- 3. FUNKTIONER ---
-def get_next_weekend():
+
+def calculate_dates(duration_type):
+    """Beregner datoer baseret på om det er weekend eller miniferie"""
     today = date.today()
-    days_ahead = 4 - today.weekday()
-    if days_ahead <= 0: days_ahead += 7
-    next_friday = today + timedelta(days=days_ahead)
-    next_sunday = next_friday + timedelta(days=2)
-    return next_friday, next_sunday
+    # Find næste fredag (4)
+    days_until_friday = 4 - today.weekday()
+    if days_until_friday <= 0: days_until_friday += 7
+    friday = today + timedelta(days=days_until_friday)
+    
+    if duration_type == "Weekend (Fre-Søn)":
+        outbound = friday
+        inbound = friday + timedelta(days=2)
+    elif duration_type == "Forlænget (Tors-Søn)":
+        outbound = friday - timedelta(days=1)
+        inbound = friday + timedelta(days=2)
+    else: # 5 Dage (Ons-Søn)
+        outbound = friday - timedelta(days=2)
+        inbound = friday + timedelta(days=2)
+        
+    return outbound, inbound
 
 def create_travel_link(origin, destination_code, date_out, date_home):
     d_out = date_out.strftime("%d%m")
     d_home = date_home.strftime("%d%m")
+    # Linker til din White Label
     return f"https://rejser.dreamtravel.dk/flights/{origin}{d_out}{destination_code}{d_home}1"
 
-# --- 4. DATA (MED WELLNESS) ---
+# --- 4. DATA ---
+
+# REJSER (Romantisk Fokus)
 DESTINATIONS = [
-    {
-        "name": "Budapest", "country": "Ungarn 🇭🇺", "code": "BUD", "price": "600 kr.", 
-        "tags": ["Wellness", "Storby", "Populær", "Alle"], "desc": "Termiske bade & spa",
-        "img": "https://images.unsplash.com/photo-1565426873118-a1dfa58f877d?w=800&q=80"
-    },
-    {
-        "name": "Reykjavik", "country": "Island 🇮🇸", "code": "KEF", "price": "1.800 kr.", 
-        "tags": ["Wellness", "Populær", "Alle"], "desc": "Den Blå Lagune & natur",
-        "img": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=800&q=80"
-    },
-    {
-        "name": "Gdansk", "country": "Polen 🇵🇱", "code": "GDN", "price": "350 kr.", 
-        "tags": ["Wellness", "Storby", "Alle"], "desc": "Luksus spa-hoteller",
-        "img": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80"
-    },
-    {
-        "name": "London", "country": "England 🇬🇧", "code": "LHR", "price": "350 kr.", 
-        "tags": ["Storby", "Populær", "Alle"], "desc": "Shopping, pubs & fodbold",
-        "img": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80"
-    },
-    {
-        "name": "Malaga", "country": "Spanien 🇪🇸", "code": "AGP", "price": "950 kr.", 
-        "tags": ["Sol & Strand", "Populær", "Alle"], "desc": "Solkysten & tapas",
-        "img": "https://images.unsplash.com/photo-1565259972852-6b95c029676e?w=800&q=80"
-    },
-    {
-        "name": "Berlin", "country": "Tyskland 🇩🇪", "code": "BER", "price": "450 kr.", 
-        "tags": ["Storby", "Alle"], "desc": "Kultur, historie & natteliv",
-        "img": "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?w=800&q=80"
-    },
-    {
-        "name": "Nice", "country": "Frankrig 🇫🇷", "code": "NCE", "price": "1.100 kr.", 
-        "tags": ["Sol & Strand", "Alle"], "desc": "Den Franske Riviera",
-        "img": "https://images.unsplash.com/photo-1533644265780-3575b630dc07?w=800&q=80"
-    },
-    {
-        "name": "Barcelona", "country": "Spanien 🇪🇸", "code": "BCN", "price": "800 kr.", 
-        "tags": ["Sol & Strand", "Storby", "Populær", "Alle"], "desc": "Strand møder storby",
-        "img": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80"
-    },
-    {
-        "name": "Rom", "country": "Italien 🇮🇹", "code": "FCO", "price": "600 kr.", 
-        "tags": ["Storby", "Populær", "Alle"], "desc": "Pasta, vin & historie",
-        "img": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80"
-    }
+    {"name": "Paris", "country": "Frankrig", "code": "CDG", "price": "750 kr.", "tag": "Romantik", "desc": "Byernes by - perfekt til par.", "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"},
+    {"name": "Venedig", "country": "Italien", "code": "VCE", "price": "950 kr.", "tag": "Romantik", "desc": "Gondoltur og italiensk middag.", "img": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80"},
+    {"name": "Rom", "country": "Italien", "code": "FCO", "price": "600 kr.", "tag": "Kultur", "desc": "Evig kærlighed i den evige stad.", "img": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80"},
+    {"name": "Budapest", "country": "Ungarn", "code": "BUD", "price": "450 kr.", "tag": "Spa", "desc": "Luksus spa-ophold til lavpris.", "img": "https://images.unsplash.com/photo-1565426873118-a1dfa58f877d?w=800&q=80"},
+    {"name": "Prag", "country": "Tjekkiet", "code": "PRG", "price": "400 kr.", "tag": "Budget", "desc": "Brostensgader og hygge.", "img": "https://images.unsplash.com/photo-1541849546-2165492d06b1?w=800&q=80"},
+    {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tag": "Luksus", "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
 ]
 
-# --- 5. APP UI ---
+# GAVER (Affiliate Placeholder Data)
+GIFTS = {
+    "Hende": [
+        {"name": "Luksus Spa Dag", "brand": "DuGlemmerDetAldrig", "price": "899,-", "img": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Parfume Abonnement", "brand": "Goodiebox", "price": "199,-", "img": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Weekendtaske Læder", "brand": "CarrieAlong", "price": "1.200,-", "img": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+    ],
+    "Ham": [
+        {"name": "Kør Lamborghini", "brand": "DuGlemmerDetAldrig", "price": "1.495,-", "img": "https://images.unsplash.com/photo-1544614471-ebc48f6d1311?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Gin Smagning", "brand": "Smagning.dk", "price": "399,-", "img": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+        {"name": "Støjdæmpende høretelefoner", "brand": "Proshop", "price": "1.800,-", "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600", "link": "DIT_AFFILIATE_LINK_HER"},
+    ]
+}
 
-# Header med Surprise Knap
-col_h1, col_h2 = st.columns([3, 1])
-with col_h1:
-    st.markdown("""
-        <div class="header-text">DreamTravel 🌍</div>
-        <div class="sub-header-text">Find din næste rejse</div>
-    """, unsafe_allow_html=True)
-with col_h2:
-    if st.button("🎲 Prøv lykken"):
-        # Vi gemmer valget i session_state, så det huskes!
-        st.session_state['surprise_city'] = random.choice(DESTINATIONS)
-        # Vi sletter eventuelt valgt kategori for at fokusere på overraskelsen
-        st.session_state['kategori_valg'] = "Alle"
+# --- 5. APP UI LAYOUT ---
 
-# KATEGORI VÆLGER
-# Opdateret med Wellness
-kategori = st.radio(
-    "Vælg kategori", 
-    ["Alle", "Populær", "Storby", "Sol & Strand", "Wellness"], 
-    horizontal=True,
-    label_visibility="collapsed",
-    key='kategori_valg' # Nøgle så vi kan nulstille den
-)
+# HEADER
+st.markdown("""
+    <div class="hero-title">DreamTravel ❤️</div>
+    <div class="hero-subtitle">Romantiske getaways & gaver til din yndlingsperson</div>
+""", unsafe_allow_html=True)
 
-st.write("") 
+# TABS (Hovedmenu)
+tab_rejser, tab_gaver = st.tabs(["✈️ Rejser", "🎁 Gaveidéer"])
 
-# DATO & INPUT
-fri, sun = get_next_weekend()
-c1, c2 = st.columns([3, 1])
-with c1:
-    lufthavn = st.selectbox("Afrejse", ["CPH", "BLL", "AAL"], 
-                            format_func=lambda x: f"📍 {x} (København)" if x == "CPH" else f"📍 {x} (Billund)" if x == "BLL" else f"📍 {x} (Aalborg)")
-with c2:
-    st.write("") 
-    st.markdown(f"<div style='text-align:center; padding-top:10px; font-weight:bold; color:#888;'>{fri.day}/{fri.month}</div>", unsafe_allow_html=True)
-
-st.write("")
-
-# --- LOGIK: SURPRISE ---
-
-# Tjek om vi har en surprise gemt i hukommelsen
-if 'surprise_city' in st.session_state and st.session_state['surprise_city']:
-    surp = st.session_state['surprise_city']
+# --- FANE 1: REJSER ---
+with tab_rejser:
+    st.write("") # Spacer
     
-    # Vis en speciel boks
-    st.info(f"✨ Skæbnen foreslår: **{surp['name']}**! ✨")
-    
-    with st.container():
-        st.image(surp["img"], use_container_width=True)
-        t1, t2 = st.columns([2, 1])
-        with t1:
-            st.subheader(surp["name"])
-            st.markdown(f"<p style='margin-top:-5px; color:#555;'>{surp['desc']}</p>", unsafe_allow_html=True)
-        with t2:
-            st.markdown(f"<div class='price-tag'>{surp['price']}</div>", unsafe_allow_html=True)
-        
-        link = create_travel_link(lufthavn, surp["code"], fri, sun)
-        st.link_button(f"Ja tak! Book {surp['name']} ➝", link)
-    
-    # Knap til at fjerne overraskelsen og se listen igen
-    if st.button("❌ Luk og vis alle rejser"):
-        del st.session_state['surprise_city']
-        st.rerun() # Genstart siden for at fjerne boksen
+    # 1. Konfiguration
+    c1, c2 = st.columns([1, 1])
+    with c1:
+        origin = st.selectbox("Afrejse", ["CPH", "BLL", "AAL"], format_func=lambda x: f"📍 {x}")
+    with c2:
+        duration = st.selectbox("Varighed", ["Weekend (Fre-Søn)", "Forlænget (Tors-Søn)", "Miniferie (Ons-Søn)"])
+
+    # Beregn datoer
+    date_out, date_home = calculate_dates(duration)
+    st.caption(f"📅 Næste tur: {date_out.day}/{date_out.month} - {date_home.day}/{date_home.month}")
     
     st.divider()
-    st.caption("Eller vælg selv herunder:")
 
-# --- FILTRERING AF LISTE ---
-vis_liste = [d for d in DESTINATIONS if kategori in d["tags"]]
-
-if not vis_liste:
-    st.info("Ingen rejser fundet i denne kategori lige nu.")
-
-for dest in vis_liste:
-    with st.container():
-        st.image(dest["img"], use_container_width=True)
-        
-        col_text, col_price = st.columns([2, 1])
-        with col_text:
-            st.subheader(dest["name"])
-            st.markdown(f"<p style='margin-top:-5px; font-size:14px; color:#666;'>{dest['country']} • {dest['desc']}</p>", unsafe_allow_html=True)
+    # 2. Vis Rejser
+    for dest in DESTINATIONS:
+        with st.container():
+            st.image(dest["img"], use_container_width=True)
             
-        with col_price:
-            st.markdown(f"<div class='price-tag'>{dest['price']}</div>", unsafe_allow_html=True)
-        
-        link = create_travel_link(lufthavn, dest["code"], fri, sun)
-        st.link_button("Se flybilletter ➝", link)
+            # Tekst og pris i to kolonner
+            t1, t2 = st.columns([2, 1])
+            with t1:
+                st.subheader(dest["name"])
+                st.markdown(f"<span style='color:#666; font-size:14px;'>{dest['desc']}</span>", unsafe_allow_html=True)
+            with t2:
+                st.markdown(f"<div style='text-align:right;'><span class='price-tag'>{dest['price']}</span></div>", unsafe_allow_html=True)
+            
+            # Generer link
+            link = create_travel_link(origin, dest["code"], date_out, date_home)
+            st.link_button(f"Book {duration.split(' ')[0]} i {dest['name']} ➝", link)
+
+# --- FANE 2: GAVEIDÉER ---
+with tab_gaver:
+    st.write("")
+    st.info("💡 Mangler du gaven til turen? Her er vores favoritter.")
+    
+    gift_gender = st.radio("Hvem er gaven til?", ["Hende", "Ham"], horizontal=True)
+    
+    st.write("")
+    
+    # Grid layout til gaver
+    selected_gifts = GIFTS[gift_gender]
+    
+    for gift in selected_gifts:
+        with st.container():
+            c_img, c_txt = st.columns([1, 2])
+            
+            with c_img:
+                st.image(gift["img"], use_container_width=True)
+            
+            with c_txt:
+                st.subheader(gift["name"])
+                st.caption(f"Fra {gift['brand']}")
+                st.markdown(f"**{gift['price']}**")
+                st.link_button("Køb nu 🎁", gift["link"])
