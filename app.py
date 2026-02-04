@@ -5,21 +5,18 @@ import random
 # --- 1. OPSÆTNING ---
 st.set_page_config(page_title="Love & Travel", page_icon="❤️", layout="centered")
 
-# --- 2. CSS STYLING (GLASSMORPHISM & BREDE KNAPPER) ---
+# --- 2. CSS STYLING (GLASSMORPHISM & UI) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
 
-    /* Baggrund: En lækker varm gradient */
     .stApp {
         background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
         font-family: 'Poppins', sans-serif;
     }
 
-    /* Skjul standard ting */
     #MainMenu, footer, header {visibility: hidden;}
 
-    /* --- TYPOGRAFI --- */
     h1, h2, h3 {
         font-family: 'Playfair Display', serif;
         color: #2c3e50;
@@ -40,7 +37,7 @@ st.markdown("""
         font-style: italic;
     }
 
-    /* --- GLASSMORPHISM KORT --- */
+    /* KORT DESIGN */
     div[data-testid="stVerticalBlock"] > div > div[data-testid="stVerticalBlock"] {
         background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(10px);
@@ -59,7 +56,7 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* --- KNAPPER --- */
+    /* KNAPPER */
     div.stButton > button:first-child {
         width: 100%;
         background: linear-gradient(45deg, #1A1A1A, #4a4a4a);
@@ -75,8 +72,16 @@ st.markdown("""
         transform: scale(1.02);
         background: linear-gradient(45deg, #000, #333);
     }
+    
+    /* Sekundær knap (Luk Surprise) */
+    div.stButton > button.secondary {
+        background: transparent;
+        border: 1px solid #ccc;
+        color: #555;
+        box-shadow: none;
+    }
 
-    /* --- PRIS TAG --- */
+    /* PRIS TAG */
     .price-tag {
         background-color: #f8f9fa;
         padding: 5px 12px;
@@ -88,31 +93,58 @@ st.markdown("""
         border: 1px solid #eee;
     }
 
-    /* --- TABS STYLING (OPDATERET: BREDE KNAPPER) --- */
+    /* TABS */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
         background-color: transparent;
-        width: 100%; /* Sikrer containeren fylder ud */
+        width: 100%;
     }
     .stTabs [data-baseweb="tab"] {
         height: 55px;
         white-space: pre-wrap;
-        background-color: rgba(255, 255, 255, 0.6); /* Lidt gennemsigtig */
+        background-color: rgba(255, 255, 255, 0.6);
         border-radius: 15px;
         border: 1px solid rgba(255, 255, 255, 0.5);
         color: #555;
         font-weight: 600;
         font-size: 16px;
-        flex: 1; /* MAGIEN: Dette tvinger knapperne til at dele pladsen ligeligt (50/50) */
+        flex: 1;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    
-    /* Den aktive fane */
     .stTabs [aria-selected="true"] {
         background-color: #1A1A1A !important;
         color: white !important;
         border: none;
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    /* GAVE KATEGORI KNAPPER (Radio) */
+    div[role="radiogroup"] {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    div[role="radiogroup"] label {
+        background-color: white !important;
+        border: 1px solid #eee;
+        padding: 10px 20px;
+        border-radius: 25px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+    }
+    div[role="radiogroup"] label[data-checked="true"] {
+        background-color: #1A1A1A !important;
+        color: white !important;
+        border-color: #1A1A1A;
+    }
+    div[role="radiogroup"] label p {
+        font-weight: 600;
+        font-size: 14px;
+    }
+    div[role="radiogroup"] label[data-checked="true"] p {
+        color: white !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -153,28 +185,33 @@ DESTINATIONS = [
     {"name": "Santorini", "country": "Grækenland", "code": "JTR", "price": "1.800 kr.", "tag": "Luksus", "desc": "Solnedgang og hvide huse.", "img": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"},
 ]
 
+# DINE AFFILIATE LINKS ER NU HERINDE:
 GIFTS = {
-    "Hende": [
-        {"name": "Luksus Spa Dag", "brand": "DuGlemmerDetAldrig", "price": "899,-", "img": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600", "link": "LINK_HER"},
-        {"name": "Parfume Abonnement", "brand": "Goodiebox", "price": "199,-", "img": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600", "link": "LINK_HER"},
-        {"name": "Weekendtaske Læder", "brand": "CarrieAlong", "price": "1.200,-", "img": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600", "link": "LINK_HER"},
+    "Til Hende": [
+        {"name": "Økologisk Hudpleje", "brand": "Naturligolie.dk", "price": "Fra 249,-", "img": "https://images.unsplash.com/photo-1556228720-1987eb83bb5d?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=58130"},
+        {"name": "Personlig Indgravering", "brand": "Dahls Gravering", "price": "Unik gave", "img": "https://images.unsplash.com/photo-1629196914168-3a9644336cf3?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=107810"},
+        {"name": "Australian Bodycare", "brand": "Tea Tree Oil", "price": "Fra 99,-", "img": "https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=52884"},
     ],
-    "Ham": [
-        {"name": "Kør Lamborghini", "brand": "DuGlemmerDetAldrig", "price": "1.495,-", "img": "https://images.unsplash.com/photo-1544614471-ebc48f6d1311?w=600", "link": "LINK_HER"},
-        {"name": "Gin Smagning", "brand": "Smagning.dk", "price": "399,-", "img": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600", "link": "LINK_HER"},
-        {"name": "Støjdæmpende høretelefoner", "brand": "Proshop", "price": "1.800,-", "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600", "link": "LINK_HER"},
+    "Til Ham": [
+        {"name": "Elektronik & Gadgets", "brand": "Proshop", "price": "Kæmpe udvalg", "img": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=67785"},
+        {"name": "Outdoor Udstyr", "brand": "Pro Outdoor", "price": "Til Eventyret", "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=42820"},
+        {"name": "Barbering & Pleje", "brand": "Shavesafe", "price": "Fra 149,-", "img": "https://images.unsplash.com/photo-1621607512214-68297480165e?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=75729"},
+        {"name": "Gourmet Kaffe", "brand": "KaffeImperiet", "price": "Luksus bønner", "img": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=114886"},
+    ],
+    "For Begge": [
+        {"name": "Spa & Wellness Ophold", "brand": "Hotel Viking", "price": "Luksus", "img": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=77692"},
+        {"name": "Kærlighed & Leg", "brand": "Sinful", "price": "Frække gaver", "img": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=84227"},
+        {"name": "Sjov 'Depresso' Kaffe", "brand": "Depresso Coffee", "price": "Fra 129,-", "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600", "link": "https://www.partner-ads.com/dk/klikbanner.php?partnerid=20107&bannerid=79802"},
     ]
 }
 
 # --- 5. APP UI LAYOUT ---
 
-# HEADER
 st.markdown("""
     <div class="hero-title">DreamTravel ❤️</div>
     <div class="hero-subtitle">Romantiske getaways & gaver til din yndlingsperson</div>
 """, unsafe_allow_html=True)
 
-# TABS (Hovedmenu)
 tab_rejser, tab_gaver = st.tabs(["✈️ Rejser", "🎁 Gaveidéer"])
 
 # --- FANE 1: REJSER ---
@@ -188,13 +225,41 @@ with tab_rejser:
     with c2:
         duration = st.selectbox("Varighed", ["Weekend (Fre-Søn)", "Forlænget (Tors-Søn)", "Miniferie (Ons-Søn)"])
 
-    # Beregn datoer
     date_out, date_home = calculate_dates(duration)
     st.caption(f"📅 Næste tur: {date_out.day}/{date_out.month} - {date_home.day}/{date_home.month}")
     
-    st.write("") # Lidt luft
+    st.divider()
 
-    # 2. Vis Rejser
+    # --- PRØV LYKKEN SEKTION ---
+    if st.button("🎲 Prøv lykken - Vælg for os"):
+        st.session_state['surprise_city'] = random.choice(DESTINATIONS)
+    
+    # Vis Surprise Kort
+    if 'surprise_city' in st.session_state:
+        surp = st.session_state['surprise_city']
+        
+        st.info(f"✨ Vi har valgt en romantisk tur til **{surp['name']}**! ✨")
+        
+        with st.container():
+            st.image(surp["img"], use_container_width=True)
+            t1, t2 = st.columns([2, 1])
+            with t1:
+                st.subheader(surp["name"])
+                st.markdown(f"*{surp['desc']}*")
+            with t2:
+                st.markdown(f"<div style='text-align:right;'><span class='price-tag'>{surp['price']}</span></div>", unsafe_allow_html=True)
+            
+            link = create_travel_link(origin, surp["code"], date_out, date_home)
+            st.link_button(f"Ja tak! Book {surp['name']} ➝", link)
+            
+            if st.button("❌ Luk (Vis alle)", key="close_surprise", type="secondary"):
+                del st.session_state['surprise_city']
+                st.rerun()
+        
+        st.divider()
+        st.caption("Eller vælg selv fra listen:")
+
+    # 2. Vis Rejser (Normal liste)
     for dest in DESTINATIONS:
         with st.container():
             st.image(dest["img"], use_container_width=True)
@@ -212,14 +277,22 @@ with tab_rejser:
 # --- FANE 2: GAVEIDÉER ---
 with tab_gaver:
     st.write("")
-    st.info("💡 Mangler du gaven til turen? Her er vores favoritter.")
+    st.info("💡 Forkæl din partner før rejsen (eller bare fordi)")
     
-    gift_gender = st.radio("Hvem er gaven til?", ["Hende", "Ham"], horizontal=True)
+    # Kategori vælger (Knapper)
+    gift_category = st.radio(
+        "Kategori", 
+        ["Til Hende", "For Begge", "Til Ham"], 
+        horizontal=True,
+        label_visibility="collapsed"
+    )
     
     st.write("")
     
-    selected_gifts = GIFTS[gift_gender]
+    # Hent gaver fra den valgte kategori
+    selected_gifts = GIFTS[gift_category]
     
+    # Vis gaver
     for gift in selected_gifts:
         with st.container():
             c_img, c_txt = st.columns([1, 2])
@@ -229,6 +302,9 @@ with tab_gaver:
             
             with c_txt:
                 st.subheader(gift["name"])
-                st.caption(f"Fra {gift['brand']}")
+                st.caption(f"{gift['brand']}")
+                # Pris som fed tekst
                 st.markdown(f"**{gift['price']}**")
-                st.link_button("Køb nu 🎁", gift["link"])
+                
+                # Affiliate Link Knap
+                st.link_button("Gå til butik 🎁", gift["link"])
